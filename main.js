@@ -136,7 +136,7 @@ let handleOutgoingChat = () => {
 
     let html = `<div class="chat-content">
                     <div class="chat-details">
-                        <img src="images/user.jpg" alt="user-img">
+                        <img src="./assets/person-fill.svg" alt="user-img">
                         <p>${userText}</p>
                     </div>
                 </div>`;
