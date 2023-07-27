@@ -1,21 +1,29 @@
- const {value: apiKey}  = Swal.fire({
-     title: 'Enter your API key',
-     input: 'text',
-     inputPlaceholder: 'Enter your API key...',
-     footer: `<div class='column'><p>Don't have an API key ?</p><a href="https://platform.openai.com/account/api-keys"> Get an API key</a></div>`,
-     showCancelButton: true,
-     confirmButtonColor: "#00A67E",
-     cancelButtonColor: "#00A67E",
-     preConfirm: (inputValue) => {
-         // Custom validation logic
-         if (!inputValue) {
-             Swal.showValidationMessage('Please enter an API key!');
-             return false; // Prevent dialog from being confirmed
-         }
-         return inputValue; // Dialog will be confirmed, and the API key will be stored in `value`
-     }
- });
+let API_KEY = null;
 
+const apiKeySwal = () => {
+    Swal.fire({
+        title: 'Enter your API key',
+        input: 'text',
+        inputPlaceholder: 'Enter your API key...',
+        footer: `<div class='column'><p>Don't have an API key ?</p><a target="_blank" href="https://platform.openai.com/account/api-keys"> Get an API key</a></div>`,
+        showCancelButton: true,
+        confirmButtonColor: "#343541",
+        cancelButtonColor: "#343541",
+        preConfirm: (inputValue) => {
+            if (inputValue === "") {
+                Swal.showValidationMessage('Please enter an API key!');
+                return false;
+            }
+            API_KEY = inputValue;
+            return inputValue;
+        }
+    }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.cancel) {}
+        // console.log(API_KEY);
+    });
+};
+
+apiKeySwal();
 
 chatInput = document.querySelector("#chat-input");
 let sendButton = document.querySelector("#send-btn");
@@ -24,8 +32,6 @@ let themeButton = document.querySelector("#theme-btn");
 let deleteButton = document.querySelector("#delete-btn");
 
 let userText = null;
-let API_KEY = inputValue
-//let API_KEY = "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";
 
 let loadDataFromLocalstorage = () => {
     let themeColor = localStorage.getItem("themeColor");
@@ -39,7 +45,7 @@ let loadDataFromLocalstorage = () => {
                         </div>`
 
     chatContainer.innerHTML = localStorage.getItem("all-chats") || defaultText;
-    chatContainer.scrollTo(0, chatContainer.scrollHeight); // Scroll to bottom of the chat container
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
 }
 
 let createChatElement = (content, className) => {
@@ -75,7 +81,7 @@ let getChatResponse = async(incomingChatDiv) => {
         pElement.textContent = response.choices[0].text.trim();
     } catch (error) {
         pElement.classList.add("error");
-        pElement.textContent = "Oops! Something went wrong while retrieving the response. Please try again Or Contact the developer on this number +92 313 0019086.";
+        pElement.textContent = "Oops! Something went wrong. Please enter an API Key Or try diferent API key Or contact the developer on this number +92 313 0019086.";
     }
     incomingChatDiv.querySelector(".typing-animation").remove();
     incomingChatDiv.querySelector(".chat-details").appendChild(pElement);
@@ -138,8 +144,8 @@ deleteButton.addEventListener("click", () => {
         title: 'Do you want to clear chat ?',
         showCancelButton: true,
         confirmButtonText: 'Delete',
-        confirmButtonColor: "#00a67e",
-        cancelButtonColor: "#00a67e"
+        confirmButtonColor: "#343541",
+        cancelButtonColor: "#343541"
     }).then((result) => {
         if (result.isConfirmed) {
             localStorage.removeItem("all-chats");
