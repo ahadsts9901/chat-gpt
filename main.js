@@ -1,20 +1,20 @@
-// const { value: apiKey } = Swal.fire({
-//     title: 'Enter your API key',
-//     input: 'text',
-//     inputPlaceholder: 'Enter your API key...',
-//     footer: `<div class='column'><p>Don't have an API key ?</p><a href="https://platform.openai.com/account/api-keys"> Get an API key</a></div>`,
-//     showCancelButton: true,
-//     confirmButtonColor: "#00A67E",
-//     cancelButtonColor: "#00A67E",
-//     preConfirm: (inputValue) => {
-//         // Custom validation logic
-//         if (!inputValue) {
-//             Swal.showValidationMessage('Please enter an API key!');
-//             return false; // Prevent dialog from being confirmed
-//         }
-//         return inputValue; // Dialog will be confirmed, and the API key will be stored in `value`
-//     }
-// });
+ const { value: apiKey } = Swal.fire({
+     title: 'Enter your API key',
+     input: 'text',
+     inputPlaceholder: 'Enter your API key...',
+     footer: `<div class='column'><p>Don't have an API key ?</p><a href="https://platform.openai.com/account/api-keys"> Get an API key</a></div>`,
+     showCancelButton: true,
+     confirmButtonColor: "#00A67E",
+     cancelButtonColor: "#00A67E",
+     preConfirm: (inputValue) => {
+         // Custom validation logic
+         if (!inputValue) {
+             Swal.showValidationMessage('Please enter an API key!');
+             return false; // Prevent dialog from being confirmed
+         }
+         return inputValue; // Dialog will be confirmed, and the API key will be stored in `value`
+     }
+ });
 
 
 chatInput = document.querySelector("#chat-input");
