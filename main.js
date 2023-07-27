@@ -1,4 +1,4 @@
- const { value: apiKey } = Swal.fire({
+ const {value: apiKey}  = Swal.fire({
      title: 'Enter your API key',
      input: 'text',
      inputPlaceholder: 'Enter your API key...',
@@ -24,8 +24,8 @@ let themeButton = document.querySelector("#theme-btn");
 let deleteButton = document.querySelector("#delete-btn");
 
 let userText = null;
-// let API_KEY = ""
-let API_KEY = "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";
+let API_KEY = apikey
+//let API_KEY = "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";
 
 let loadDataFromLocalstorage = () => {
     let themeColor = localStorage.getItem("themeColor");
