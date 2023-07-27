@@ -24,7 +24,7 @@ let themeButton = document.querySelector("#theme-btn");
 let deleteButton = document.querySelector("#delete-btn");
 
 let userText = null;
-let API_KEY = apikey
+let API_KEY = inputValue
 //let API_KEY = "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";
 
 let loadDataFromLocalstorage = () => {
